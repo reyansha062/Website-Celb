@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Milestone Unlocked: 10th Website Deployed!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+            }
+          },
+          animation: {
+            'float-subtle': 'float 5s ease-in-out infinite',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+            'pop-in': 'popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '0.4' },
+              '50%': { opacity: '0.85' },
+            },
+            popIn: {
+              '0%': { opacity: '0', transform: 'scale(0.92) translateY(12px)' },
+              '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #050711;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-card-hover {
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 20px 35px rgba(14, 165, 233, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .neon-text-gradient {
+      background: linear-gradient(135deg, #38bdf8 0%, #a855f7 48%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    #celebrationCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    /* Layout override modes toggled via JS */
+    body.mode-phone .main-container {
+      max-width: 480px !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+    body.mode-phone .projects-grid-container {
+      grid-template-columns: 1fr !important;
+    }
+    body.mode-laptop .main-container {
+      max-width: 1200px !important;
+    }
+  </style>
+</head>
+<body class="mode-laptop selection:bg-purple-600 selection:text-white relative">
+
+  <!-- Ambient light blobs -->
+  <div class="fixed -top-32 -left-32 w-96 h-96 bg-cyan-600/20 rounded-full blur-[140px] pointer-events-none animate-pulse-soft"></div>
+  <div class="fixed top-1/3 -right-32 w-96 h-96 bg-purple-600/20 rounded-full blur-[150px] pointer-events-none animate-pulse-soft"></div>
+  <div class="fixed bottom-0 left-1/3 w-[500px] h-[300px] bg-pink-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+  <!-- Particle simulation canvas -->
+  <canvas id="celebrationCanvas"></canvas>
+
+  <div id="devicePromptModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl">
+    <div class="glass-panel max-w-md w-full rounded-3xl p-7 sm:p-9 text-center border border-slate-700/80 shadow-2xl animate-pop-in relative overflow-hidden">
+      <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-20 bg-gradient-to-r from-cyan-500 to-purple-600 blur-2xl opacity-60"></div>
+      
+      <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-600 p-[1px] shadow-lg shadow-cyan-500/25 flex items-center justify-center text-3xl">
+        🎉
+      </div>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-3">
+        <span>Milestone Ready</span>
+      </div>
+
+      <h2 class="text-2xl font-extrabold text-white tracking-tight mb-2">Welcome, Builder!</h2>
+      <p class="text-slate-300 text-sm leading-relaxed mb-7">
+        Before we ignite the 10th deployment celebration, tell us what you're using today for the best visual experience:
+      </p>
+
+      <div class="grid grid-cols-2 gap-3.5 mb-5">
+        <button id="selectPhoneBtn" class="group flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-800/70 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400 transition-all active:scale-95 shadow-md">
+          <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">📱</span>
+          <span class="font-bold text-white text-sm">Phone</span>
+          <span class="text-[11px] text-slate-400">Compact feed</span>
+        </button>
+
+        <button id="selectLaptopBtn" class="group flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-800/70 hover:bg-slate-800 border border-slate-700 hover:border-purple-400 transition-all active:scale-95 shadow-md">
+          <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">💻</span>
+          <span class="font-bold text-white text-sm">Laptop / PC</span>
+          <span class="text-[11px] text-slate-400">Wide dashboard</span>
+        </button>
+      </div>
+
+      <p class="text-[11px] text-slate-500">You can also swap between Phone and Laptop view anytime at the top bar.</p>
+    </div>
+  </div>
+
+  <header class="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 pt-5 pb-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 p-[1px] flex items-center justify-center shadow-lg shadow-cyan-500/20">
+        <div class="w-full h-full bg-slate-900 rounded-[11px] flex items-center justify-center font-extrabold text-cyan-400 text-sm">
+          #10
+        </div>
+      </div>
+      <div>
+        <h1 class="text-sm font-bold text-white tracking-wide">Reyansh's Web Fleet</h1>
+        <p class="text-[11px] text-slate-400">GitHub Pages Milestone Release</p>
+      </div>
+    </div>
+
+    <!-- Layout & Audio Controls -->
+    <div class="flex items-center gap-2">
+      <!-- Device View Toggle Pill -->
+      <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
+        <button id="togglePhoneView" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-1.5" title="Mobile view">
+          <span>📱</span><span class="hidden sm:inline">Phone</span>
+        </button>
+        <button id="toggleLaptopView" class="px-2.5 py-1 rounded-lg bg-cyan-500 text-white transition-all flex items-center gap-1.5" title="Laptop view">
+          <span>💻</span><span class="hidden sm:inline">Laptop</span>
+        </button>
+      </div>
+
+      <!-- Audio Mute / Unmute -->
+      <button id="audioToggleBtn" class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition-all" title="Toggle Victory Sounds">
+        <span id="audioIcon">🔊</span>
+        <span id="audioLabel" class="hidden sm:inline">Sound</span>
+      </button>
+
+      <!-- Launch Celebration button -->
+      <button id="launchBurstNav" class="px-3 sm:px-4 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-white text-xs font-bold shadow-md shadow-cyan-500/25 hover:from-cyan-400 hover:to-indigo-500 active:scale-95 transition-all">
+        ✨ Burst!
+      </button>
+    </div>
+  </header>
+
+  <main class="main-container relative z-20 mx-auto px-4 sm:px-6 pt-4 pb-24 transition-all duration-300">
+    <!-- Big Milestone Banner -->
+    <section class="glass-panel rounded-3xl p-6 sm:p-10 mb-10 relative overflow-hidden border border-slate-700/60 shadow-2xl animate-float-subtle">
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        <!-- Milestone Counter & Narrative -->
+        <div class="lg:col-span-8 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+            <span>Historical Achievement Unlocked</span>
+          </div>
+
+          <div class="flex items-baseline justify-center lg:justify-start gap-2.5 my-1">
+            <span id="counterDigit" class="text-7xl sm:text-8xl md:text-9xl font-black tracking-tight neon-text-gradient drop-shadow-xl">0</span>
+            <div class="flex flex-col items-start">
+              <span class="text-3xl sm:text-4xl md:text-5xl font-black text-purple-400">th</span>
+              <span class="text-[11px] sm:text-xs uppercase tracking-widest text-slate-400 font-bold">Deployed Website</span>
+            </div>
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-2">
+            Ten Websites Shipped to the World! 🚀
+          </h2>
+          <p class="mt-3 text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            From classic browser arcade games to AI voice assistants and real-time utilities. All 10 of your creations are compiled right here, completely clickable, and ready to explore!
+          </p>
+
+          <div class="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+            <button id="megaCelebrationBtn" class="px-6 py-3 rounded-xl font-extrabold text-white text-xs sm:text-sm bg-gradient-to-r from-cyan-500 via-indigo-600 to-pink-500 shadow-lg shadow-indigo-600/30 hover:scale-105 active:scale-95 transition-all">
+              🎉 Launch Double Fireworks
+            </button>
+            <button id="quickFanfareBtn" class="px-5 py-3 rounded-xl font-bold text-slate-200 text-xs sm:text-sm bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all active:scale-95 flex items-center gap-2">
+              <span>🎵 Play Victory Fanfare</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Trophy Visual -->
+        <div class="lg:col-span-4 flex flex-col items-center">
+          <div class="w-full p-5 rounded-2xl bg-gradient-to-b from-slate-800/90 to-slate-900/90 border border-slate-700/80 text-center relative overflow-hidden shadow-xl">
+            <div class="text-5xl mb-2">🏆</div>
+            <h3 class="text-base font-bold text-white">Milestone Century Club</h3>
+            <p class="text-xs text-amber-400 font-semibold mt-0.5">Double Digit Web Developer</p>
+            
+            <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-slate-800">
+              <div class="bg-slate-950/50 p-2.5 rounded-xl border border-slate-800">
+                <span class="block text-xl font-extrabold text-cyan-400">10 / 10</span>
+                <span class="text-[10px] text-slate-400 uppercase font-semibold">Live URLs</span>
+              </div>
+              <div class="bg-slate-950/50 p-2.5 rounded-xl border border-slate-800">
+                <span class="block text-xl font-extrabold text-pink-400">100%</span>
+                <span class="text-[10px] text-slate-400 uppercase font-semibold">GitHub Pages</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-cyan-400">
+            <span>Portfolio Catalog</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>All 10 Sites Online</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-1">Explore Your 10 Deployed Websites</h3>
+        </div>
+        <p class="text-xs text-slate-400">Click <strong class="text-cyan-400">Visit Site ↗</strong> to open directly, or <strong class="text-purple-400">Preview</strong> to test in-app.</p>
+      </div>
+
+      <!-- The grid that shifts based on Phone / Laptop modes -->
+      <div id="websitesGrid" class="projects-grid-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+  </main>
+
+  <div id="previewModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md hidden">
+    <div class="glass-panel w-full max-w-4xl h-[88vh] rounded-2xl flex flex-col overflow-hidden border border-slate-700 shadow-2xl relative animate-pop-in">
+      
+      <!-- Preview Header -->
+      <div class="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3 overflow-hidden">
+          <span id="previewModalIcon" class="text-2xl">🌐</span>
+          <div>
+            <h4 id="previewModalTitle" class="text-sm font-bold text-white truncate">Website Preview</h4>
+            <a id="previewModalLink" href="#" target="_blank" rel="noopener noreferrer" class="text-xs text-cyan-400 hover:underline truncate block">https://reyansha062.github.io/...</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <a id="previewModalOpenDirect" href="#" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-white font-bold text-xs flex items-center gap-1 transition-all">
+            <span>Open Tab</span> <span>↗</span>
+          </a>
+          <button id="closePreviewBtn" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-sm font-bold transition-all">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Iframe viewport container with fallback message -->
+      <div class="flex-1 bg-slate-950 relative flex flex-col">
+        <div id="iframeLoadingIndicator" class="absolute inset-0 flex items-center justify-center text-slate-400 text-xs gap-2 pointer-events-none">
+          <div class="w-4 h-4 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+          <span>Loading project frame...</span>
+        </div>
+        <iframe id="previewIframe" class="w-full h-full border-none relative z-10" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+      </div>
+
+      <!-- Preview Footer -->
+      <div class="px-4 py-2 bg-slate-900/80 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+        <span>🔒 Secure Sandboxed Preview</span>
+        <span>If GitHub Pages blocks embedded frames, use the "Open Tab ↗" button</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none glass-panel px-4 py-2.5 rounded-xl border border-cyan-500/40 text-xs font-semibold text-cyan-300 shadow-xl flex items-center gap-2">
+    <span id="toastIcon">📋</span>
+    <span id="toastMessage">Copied link to clipboard!</span>
+  </div>
+
+  <script>
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      tone(freq, duration, delay = 0, type = 'sine') {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        setTimeout(() => {
+          try {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+
+            gain.gain.setValueAtTime(0, this.ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.2, this.ctx.currentTime + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+
+            osc.start();
+            osc.stop(this.ctx.currentTime + duration);
+          } catch (e) {}
+        }, delay);
+      }
+
+      playFanfare() {
+        if (!this.enabled) return;
+        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+        notes.forEach((freq, idx) => {
+          this.tone(freq, 0.5, idx * 80, 'triangle');
+        });
+      }
+
+      playPop() {
+        if (!this.enabled) return;
+        this.tone(620, 0.08, 0, 'sine');
+      }
+
+      playSpark() {
+        if (!this.enabled) return;
+        this.tone(880, 0.12, 0, 'triangle');
+      }
+    }
+
+    const sound = new SoundEngine();
+
+    const canvas = document.getElementById('celebrationCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const colors = ['#38bdf8', '#818cf8', '#c084fc', '#f472b6', '#fbbf24', '#34d399', '#f87171', '#ffffff'];
+
+    class Particle {
+      constructor(x, y, opts = {}) {
+        this.x = x;
+        this.y = y;
+        const angle = opts.angle !== undefined ? opts.angle : Math.random() * Math.PI * 2;
+        const speed = opts.speed || (Math.random() * 8 + 3);
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.size = opts.size || (Math.random() * 7 + 4);
+        this.color = opts.color || colors[Math.floor(Math.random() * colors.length)];
+        this.alpha = 1;
+        this.decay = Math.random() * 0.015 + 0.008;
+        this.gravity = opts.gravity !== undefined ? opts.gravity : 0.2;
+        this.drag = 0.985;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 12;
+        this.shape = opts.shape || (Math.random() > 0.4 ? 'rect' : 'circle');
+      }
+
+      update() {
+        this.vx *= this.drag;
+        this.vy = this.vy * this.drag + this.gravity;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rotation += this.rotSpeed;
+        this.alpha -= this.decay;
+      }
+
+      draw(c) {
+        if (this.alpha <= 0) return;
+        c.save();
+        c.globalAlpha = Math.max(0, this.alpha);
+        c.translate(this.x, this.y);
+        c.rotate((this.rotation * Math.PI) / 180);
+        c.fillStyle = this.color;
+
+        if (this.shape === 'rect') {
+          c.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
+        } else {
+          c.beginPath();
+          c.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+          c.fill();
+        }
+        c.restore();
+      }
+    }
+
+    function createBurst(x, y, count = 50) {
+      sound.playPop();
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle(x, y));
+      }
+    }
+
+    function createMegaFireworks() {
+      sound.playFanfare();
+      // Cannon from left
+      for (let i = 0; i < 70; i++) {
+        const angle = -Math.PI / 4 + (Math.random() - 0.5) * 0.8;
+        particles.push(new Particle(50, height - 30, {
+          angle: angle,
+          speed: Math.random() * 14 + 8,
+          gravity: 0.25
+        }));
+      }
+      // Cannon from right
+      for (let i = 0; i < 70; i++) {
+        const angle = -Math.PI * 0.75 + (Math.random() - 0.5) * 0.8;
+        particles.push(new Particle(width - 50, height - 30, {
+          angle: angle,
+          speed: Math.random() * 14 + 8,
+          gravity: 0.25
+        }));
+      }
+      // Central mid-air burst
+      setTimeout(() => {
+        createBurst(width / 2, height / 3, 60);
+      }, 250);
+    }
+
+    function animationLoop() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw(ctx);
+        if (p.alpha <= 0 || p.y > height + 50) {
+          particles.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(animationLoop);
+    }
+    animationLoop();
+
+    const deployedWebsites = [
+      {
+        id: 1,
+        title: "AeroCast",
+        category: "Weather App",
+        url: "https://reyansha062.github.io/AeroCast/",
+        description: "Real-time atmospheric insights, forecast tracking, and clean meteorological interface.",
+        icon: "⛅",
+        badgeColor: "bg-sky-500/20 text-sky-300 border-sky-500/30"
+      },
+      {
+        id: 2,
+        title: "Dinosaur Game",
+        category: "Classic Runner",
+        url: "https://reyansha062.github.io/dinasour-game/",
+        description: "Addictive endless arcade runner recreating the iconic offline obstacle challenge.",
+        icon: "🦖",
+        badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
+      },
+      {
+        id: 3,
+        title: "Fire-launch",
+        category: "Action Shooter",
+        url: "https://reyansha062.github.io/Fire-launch/",
+        description: "Fast-paced space arcade game packed with projectiles, velocity physics, and targets.",
+        icon: "🚀",
+        badgeColor: "bg-orange-500/20 text-orange-300 border-orange-500/30"
+      },
+      {
+        id: 4,
+        title: "Flappy Bird",
+        category: "Arcade Favorite",
+        url: "https://reyansha062.github.io/flappy-bird/",
+        description: "Precise tap mechanics, dynamic pipes, and high-score survival gameplay on the web.",
+        icon: "🐥",
+        badgeColor: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
+      },
+      {
+        id: 5,
+        title: "GTA6 Mini Game",
+        category: "Action Game",
+        url: "https://reyansha062.github.io/GTA6/",
+        description: "Exciting urban-themed gaming playground showcasing interactive canvas animations.",
+        icon: "🌴",
+        badgeColor: "bg-pink-500/20 text-pink-300 border-pink-500/30"
+      },
+      {
+        id: 6,
+        title: "Jarvis",
+        category: "Voice Assistant AI",
+        url: "https://reyansha062.github.io/Jarvis/",
+        description: "Interactive smart assistant responding to user commands with audio feedback and intelligence.",
+        icon: "🤖",
+        badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30"
+      },
+      {
+        id: 7,
+        title: "Ludo",
+        category: "Multiplayer Board Game",
+        url: "https://reyansha062.github.io/Ludo/",
+        description: "Digital reproduction of the classic family board game with dice rolls and tokens.",
+        icon: "🎲",
+        badgeColor: "bg-indigo-500/20 text-indigo-300 border-indigo-500/30"
+      },
+      {
+        id: 8,
+        title: "Racing Games",
+        category: "Speed & Physics",
+        url: "https://reyansha062.github.io/Racing_games/",
+        description: "High-octane racing circuit featuring steering control, obstacle tracks, and lap timers.",
+        icon: "🏎️",
+        badgeColor: "bg-red-500/20 text-red-300 border-red-500/30"
+      },
+      {
+        id: 9,
+        title: "Snake & Ladders",
+        category: "Classic Board Game",
+        url: "https://reyansha062.github.io/Snake_Laders/",
+        description: "Turn-based roll-the-dice adventure with climbing ladders, sliding snakes, and victory paths.",
+        icon: "🐍",
+        badgeColor: "bg-teal-500/20 text-teal-300 border-teal-500/30"
+      },
+      {
+        id: 10,
+        title: "Whatscame",
+        category: "10th Milestone Achievement",
+        url: "https://reyansha062.github.io/whatscame/",
+        description: "The crown jewel milestone project that crowns the double-digit mark of your deployment journey!",
+        icon: "👑",
+        isMilestone10: true,
+        badgeColor: "bg-amber-400/25 text-amber-200 border-amber-400/50"
+      }
+    ];
+
+    const websitesGrid = document.getElementById('websitesGrid');
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
+    let toastTimeout;
+
+    function showToast(msg, icon = '✨') {
+      document.getElementById('toastIcon').textContent = icon;
+      toastMessage.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2600);
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('URL copied to clipboard!', '📋');
+        }).catch(() => {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const el = document.createElement('textarea');
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      showToast('URL copied to clipboard!', '📋');
+    }
+
+    function renderWebsites() {
+      websitesGrid.innerHTML = '';
+
+      deployedWebsites.forEach((site) => {
+        const isTen = site.isMilestone10;
+        const card = document.createElement('div');
+        
+        card.className = `glass-panel glass-card-hover rounded-2xl p-5 border relative overflow-hidden flex flex-col justify-between ${
+          isTen 
+            ? 'border-amber-400/60 ring-2 ring-amber-400/40 shadow-xl shadow-amber-500/10' 
+            : 'border-slate-800'
+        }`;
+
+        card.innerHTML = `
+          ${isTen ? `
+            <div class="absolute -top-3 -right-12 rotate-45 bg-gradient-to-r from-amber-400 to-pink-500 text-slate-950 font-black text-[10px] tracking-wider py-1 px-12 shadow-md uppercase">
+              10th Milestone
+            </div>
+          ` : ''}
+
+          <div>
+            <div class="flex items-center justify-between mb-3.5">
+              <div class="flex items-center gap-2.5">
+                <span class="text-3xl p-2 rounded-xl bg-slate-800/90 border border-slate-700/80 shadow-inner">${site.icon}</span>
+                <div>
+                  <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block">Slot #${site.id}</span>
+                  <h4 class="text-base font-extrabold ${isTen ? 'gold-gradient-text' : 'text-white'} leading-tight">${site.title}</h4>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold px-2.5 py-1 rounded-full border ${site.badgeColor}">${site.category}</span>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">${site.description}</p>
+          </div>
+
+          <div>
+            <div class="text-[11px] text-slate-400 font-mono truncate bg-slate-950/60 px-2.5 py-1.5 rounded-lg border border-slate-800/80 mb-3.5 flex items-center justify-between">
+              <span class="truncate">${site.url.replace('https://', '')}</span>
+              <button class="copy-url-btn ml-2 text-slate-400 hover:text-white transition-colors" title="Copy Link">
+                📋
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <a href="${site.url}" target="_blank" rel="noopener noreferrer" class="visit-direct-btn flex-1 py-2 px-3 rounded-xl font-bold text-xs text-white bg-gradient-to-r ${
+                isTen ? 'from-amber-500 via-orange-500 to-pink-500 shadow-md shadow-amber-500/20' : 'from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500'
+              } text-center flex items-center justify-center gap-1.5 transition-all active:scale-95">
+                <span>Visit Site</span>
+                <span>↗</span>
+              </a>
+
+              <button class="preview-btn py-2 px-3 rounded-xl font-semibold text-xs text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 flex items-center justify-center gap-1 transition-all active:scale-95" title="Quick preview in page">
+                <span>Preview</span>
+                <span>👁️</span>
+              </button>
+            </div>
+          </div>
+        `;
+
+        // Card button events
+        const copyBtn = card.querySelector('.copy-url-btn');
+        copyBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          copyToClipboard(site.url);
+          sound.playSpark();
+        });
+
+        const visitBtn = card.querySelector('.visit-direct-btn');
+        visitBtn.addEventListener('click', (e) => {
+          sound.playSpark();
+          createBurst(e.clientX || width / 2, e.clientY || height / 2, 30);
+        });
+
+        const previewBtn = card.querySelector('.preview-btn');
+        previewBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openPreviewModal(site);
+          sound.playPop();
+        });
+
+        // Click card background to fire spark
+        card.addEventListener('click', (e) => {
+          if (!e.target.closest('button') && !e.target.closest('a')) {
+            const rect = card.getBoundingClientRect();
+            createBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 25);
+          }
+        });
+
+        websitesGrid.appendChild(card);
+      });
+    }
+
+    const previewModal = document.getElementById('previewModal');
+    const previewIframe = document.getElementById('previewIframe');
+    const previewModalTitle = document.getElementById('previewModalTitle');
+    const previewModalLink = document.getElementById('previewModalLink');
+    const previewModalOpenDirect = document.getElementById('previewModalOpenDirect');
+    const previewModalIcon = document.getElementById('previewModalIcon');
+    const closePreviewBtn = document.getElementById('closePreviewBtn');
+    const iframeLoadingIndicator = document.getElementById('iframeLoadingIndicator');
+
+    function openPreviewModal(site) {
+      previewModalTitle.textContent = site.title;
+      previewModalLink.textContent = site.url;
+      previewModalLink.href = site.url;
+      previewModalOpenDirect.href = site.url;
+      previewModalIcon.textContent = site.icon;
+
+      iframeLoadingIndicator.style.display = 'flex';
+      previewIframe.src = site.url;
+
+      previewIframe.onload = () => {
+        iframeLoadingIndicator.style.display = 'none';
+      };
+
+      previewModal.classList.remove('hidden');
+    }
+
+    function closePreview() {
+      previewModal.classList.add('hidden');
+      previewIframe.src = 'about:blank';
+    }
+
+    closePreviewBtn.addEventListener('click', closePreview);
+    previewModal.addEventListener('click', (e) => {
+      if (e.target === previewModal) {
+        closePreview();
+      }
+    });
+
+    // Layout switcher (Phone / Laptop)
+    const togglePhoneView = document.getElementById('togglePhoneView');
+    const toggleLaptopView = document.getElementById('toggleLaptopView');
+
+    function setViewMode(mode) {
+      if (mode === 'phone') {
+        document.body.classList.remove('mode-laptop');
+        document.body.classList.add('mode-phone');
+
+        togglePhoneView.classList.add('bg-cyan-500', 'text-white');
+        togglePhoneView.classList.remove('text-slate-400');
+        toggleLaptopView.classList.remove('bg-cyan-500', 'text-white');
+        toggleLaptopView.classList.add('text-slate-400');
+        showToast('Switched to Phone Layout 📱', '📱');
+      } else {
+        document.body.classList.remove('mode-phone');
+        document.body.classList.add('mode-laptop');
+
+        toggleLaptopView.classList.add('bg-cyan-500', 'text-white');
+        toggleLaptopView.classList.remove('text-slate-400');
+        togglePhoneView.classList.remove('bg-cyan-500', 'text-white');
+        togglePhoneView.classList.add('text-slate-400');
+        showToast('Switched to Laptop Layout 💻', '💻');
+      }
+      sound.playPop();
+    }
+
+    togglePhoneView.addEventListener('click', () => setViewMode('phone'));
+    toggleLaptopView.addEventListener('click', () => setViewMode('laptop'));
+
+    // First-prompt device choice buttons
+    const devicePromptModal = document.getElementById('devicePromptModal');
+    const selectPhoneBtn = document.getElementById('selectPhoneBtn');
+    const selectLaptopBtn = document.getElementById('selectLaptopBtn');
+
+    function handleInitialDeviceChoice(device) {
+      devicePromptModal.classList.add('hidden');
+      setViewMode(device);
+      startCelebrationSequence();
+    }
+
+    selectPhoneBtn.addEventListener('click', () => handleInitialDeviceChoice('phone'));
+    selectLaptopBtn.addEventListener('click', () => handleInitialDeviceChoice('laptop'));
+
+    // Animated milestone counter 0 to 10
+    const counterDigit = document.getElementById('counterDigit');
+    function startCelebrationSequence() {
+      let count = 0;
+      const interval = setInterval(() => {
+        count++;
+        counterDigit.textContent = count;
+        sound.tone(380 + count * 65, 0.12);
+
+        // Gentle spark per count
+        createBurst(width / 2 + (Math.random() - 0.5) * 160, height / 3, 12);
+
+        if (count >= 10) {
+          clearInterval(interval);
+          setTimeout(() => {
+            createMegaFireworks();
+            showToast('10th Website Milestone Celebrated! 🎉', '👑');
+          }, 180);
+        }
+      }, 130);
+    }
+
+    // Navigation / Top bar trigger buttons
+    document.getElementById('megaCelebrationBtn').addEventListener('click', () => {
+      createMegaFireworks();
+    });
+
+    document.getElementById('quickFanfareBtn').addEventListener('click', () => {
+      sound.playFanfare();
+      createBurst(width / 2, height / 2, 40);
+    });
+
+    document.getElementById('launchBurstNav').addEventListener('click', () => {
+      createBurst(width - 80, 80, 45);
+    });
+
+    // Audio Mute toggle
+    const audioToggleBtn = document.getElementById('audioToggleBtn');
+    const audioIcon = document.getElementById('audioIcon');
+    const audioLabel = document.getElementById('audioLabel');
+
+    audioToggleBtn.addEventListener('click', () => {
+      sound.enabled = !sound.enabled;
+      if (sound.enabled) {
+        audioIcon.textContent = '🔊';
+        audioLabel.textContent = 'Sound';
+        sound.playPop();
+        showToast('Celebration chimes unmuted', '🔊');
+      } else {
+        audioIcon.textContent = '🔇';
+        audioLabel.textContent = 'Muted';
+        showToast('Sound muted', '🔇');
+      }
+    });
+
+    // Interactive screen click sparks
+    window.addEventListener('pointerdown', (e) => {
+      if (
+        e.target.closest('button') || 
+        e.target.closest('a') || 
+        e.target.closest('iframe') ||
+        e.target.closest('#devicePromptModal')
+      ) {
+        return;
+      }
+      createBurst(e.clientX, e.clientY, 30);
+    });
+
+    // Initialize Card Layout
+    window.addEventListener('DOMContentLoaded', () => {
+      renderWebsites();
+    });
+  </script>
+</body>
+</html>
